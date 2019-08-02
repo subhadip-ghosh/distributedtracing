@@ -8,7 +8,8 @@
 	<packaging>pom</packaging>
 
 	<modules>
-		<module>webappservice</module>
+		<module>webservice</module>
+		<module>appservice</module>
 	</modules>
 
 	<properties>
