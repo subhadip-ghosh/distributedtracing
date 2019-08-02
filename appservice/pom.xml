@@ -11,6 +11,10 @@
 
 	<groupId>org.microservices.tracing.pollerapp</groupId>
 	<artifactId>appservice</artifactId>
+	
+	<properties>
+		<maven.docerfile-plugin.version>1.4.10</maven.docerfile-plugin.version>
+	</properties>
 
 	<dependencies>
 		<dependency>
@@ -45,6 +49,27 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<groupId>com.spotify</groupId>
+				<artifactId>dockerfile-maven-plugin</artifactId>
+				<version>${maven.docerfile-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>default</id>
+						<goals>
+							<goal>build</goal>
+							<goal>push</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<repository>${project.artifactId}</repository>
+					<tag>${project.version}</tag>
+					<buildArgs>
+						<JAR_FILE>target/${project.build.finalName}.jar</JAR_FILE>
+					</buildArgs>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
